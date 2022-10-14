@@ -3,13 +3,13 @@ COMPONENT = $(word 2, $(SPLIT))
 FILE = insert.scad
 TARGET = game-insert.zip
 
-all: minimal
+all: scout
 	@echo Done!
 
 zip: clean all
 	zip $(TARGET) dist/*.stl
 
-minimal: box-minimal lid-minimal
+scout: box-scout
 
 dist: 
 	mkdir -p dist

@@ -32,21 +32,75 @@ g_tolerance = 0.15;
 // The larger the value, the bigger the gap between the lid and the box.
 g_tolerance_detents_pos = 0.1;
 
+// Scout
+
+box_height = 59;
+box_width = 102;
+box_deep = 35; 
+
+card_height = 59;
+card_width = 95;
+card_deep = 14;
+
+start = (box_width-card_width)/2-g_wall_thickness;
+token_deep = 20;
+
+t1_height = 55;
+t1_width = 28;
+t1_deep = token_deep;
+
+t2_height = 55;
+t2_width = 24;
+t2_deep = token_deep;
+
+start_r = 38;
+start_deep = 3;
+
+car_height = 40;
+car_width = 40;
+car_deep = token_deep;
 
 data =
 [
-    [   "minimal",                            // our box. name is just for code organization.
+    [   "scout",
         [
-            [ BOX_SIZE_XYZ, [46.5, 46.5, 15.0] ],        // one kv pair specifying the x, y, and z of our box exterior.
-            [ BOX_COMPONENT,                             // our first component.
+            [ BOX_SIZE_XYZ, [box_height, box_width, box_deep] ],     
+            [ BOX_NO_LID_B, true],
+            [ BOX_COMPONENT,                            
                 [
-                    [ CMP_NUM_COMPARTMENTS_XY, [4, 4] ],               // it's a grid of 4 x 4
-                    [ CMP_COMPARTMENT_SIZE_XYZ, [ 10, 10, 13.0] ],   // each compartment is 10mm x 10mm x 13mm
+                   [ CMP_COMPARTMENT_SIZE_XYZ,  [ card_height, card_width, card_deep]]
+                ],
+            ],
+            [ BOX_COMPONENT,
+                [
+                   [ CMP_COMPARTMENT_SIZE_XYZ,  [ t1_height, t1_width, card_deep+t1_deep]],
+                   //[ CMP_CUTOUT_SIDES_4B, [f , f, f, t]],
+                   [POSITION_XY,               [CENTER,start]],
+                ]
+            ],
+            [ BOX_COMPONENT,
+                [
+                   [ CMP_COMPARTMENT_SIZE_XYZ,  [ t2_height, t2_width, card_deep+t2_deep]],
+                   //[ CMP_CUTOUT_SIDES_4B, [f , f, f, t]],
+                   [POSITION_XY,               [CENTER,start+g_wall_thickness+t1_width]],
+                ]
+            ],
+            /*[ BOX_COMPONENT,
+                [
+                   [ CMP_COMPARTMENT_SIZE_XYZ,  [ start_r, start_r, card_deep+start_deep]],
+                   [POSITION_XY,               [CENTER,start+g_wall_thickness*6+t1_width+start_r/2]],
+                   [ CMP_SHAPE, ROUND ],
+                   [CMP_SHAPE_VERTICAL_B,                   t],
+                ]
+            ],*/
+            [ BOX_COMPONENT,
+                [
+                   [ CMP_COMPARTMENT_SIZE_XYZ,  [ car_height, car_width, card_deep+car_deep]],
+                   [POSITION_XY,               [CENTER,start+g_wall_thickness*5+t1_width+start_r/2]],
                 ]
             ]
         ]
-    ]
-    
+     ]
 ];
 
 
