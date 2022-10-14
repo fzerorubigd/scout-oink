@@ -35,30 +35,36 @@ g_tolerance_detents_pos = 0.1;
 // Scout
 
 box_height = 59;
-box_width = 102;
-box_deep = 35; 
+box_width = 104;
+box_deep = 34; 
 
 card_height = 59;
-card_width = 95;
+card_width = 97;
 card_deep = 14;
 
 start = (box_width-card_width)/2-g_wall_thickness;
 token_deep = 20;
 
-t1_height = 55;
-t1_width = 28;
+t1_height = box_height-(2*g_wall_thickness);
+t1_width = 29;
 t1_deep = token_deep;
 
-t2_height = 55;
-t2_width = 24;
+t2_height = box_height-(2*g_wall_thickness);
+t2_width = 25;
 t2_deep = token_deep;
 
 start_r = 38;
 start_deep = 3;
 
-car_height = 40;
-car_width = 40;
+car_height = 39;
+car_width = box_width-(2*start)-(4*g_wall_thickness)-t1_width-t2_width;
 car_deep = token_deep;
+
+card_hand = 28;
+
+tsq_height = 16;
+tsq_width = car_width;
+tsq_deep = token_deep;
 
 data =
 [
@@ -71,6 +77,12 @@ data =
                    [ CMP_COMPARTMENT_SIZE_XYZ,  [ card_height, card_width, card_deep]]
                 ],
             ],
+            [ BOX_COMPONENT,                            
+                [
+                   [ CMP_COMPARTMENT_SIZE_XYZ,  [ card_hand, box_width, card_hand/2]],
+                   [ CMP_SHAPE, ROUND]
+                ],
+            ],
             [ BOX_COMPONENT,
                 [
                    [ CMP_COMPARTMENT_SIZE_XYZ,  [ t1_height, t1_width, card_deep+t1_deep]],
@@ -81,7 +93,6 @@ data =
             [ BOX_COMPONENT,
                 [
                    [ CMP_COMPARTMENT_SIZE_XYZ,  [ t2_height, t2_width, card_deep+t2_deep]],
-                   //[ CMP_CUTOUT_SIDES_4B, [f , f, f, t]],
                    [POSITION_XY,               [CENTER,start+g_wall_thickness+t1_width]],
                 ]
             ],
@@ -96,7 +107,13 @@ data =
             [ BOX_COMPONENT,
                 [
                    [ CMP_COMPARTMENT_SIZE_XYZ,  [ car_height, car_width, card_deep+car_deep]],
-                   [POSITION_XY,               [CENTER,start+g_wall_thickness*5+t1_width+start_r/2]],
+                   [POSITION_XY,               [0,start+g_wall_thickness*2+t1_width+t2_width]],
+                ]
+            ],
+            [ BOX_COMPONENT,
+                [
+                   [ CMP_COMPARTMENT_SIZE_XYZ,  [ tsq_height, tsq_width, card_deep+tsq_deep]],
+                   [POSITION_XY,                [g_wall_thickness+car_height,start+g_wall_thickness*2+t1_width+t2_width]],
                 ]
             ]
         ]
